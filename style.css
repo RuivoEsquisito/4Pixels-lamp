@@ -79,5 +79,17 @@ body {
   }
   
   .btn-indicador.ativo .indicador {
-    background-color: #00f7ff;
+    background: linear-gradient(90deg, #00f7ff, #00d1d8, #00f7ff, #00d1d8, #00f7ff);
+    background-size: 300% 100%;
+    background-position: 0% 0%;
+    animation: mover-cor 7s linear infinite;
+  }
+
+  @keyframes mover-cor {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 300% 0%; /* volta à cor original */
+    }
   }
