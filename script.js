@@ -1,9 +1,15 @@
 const botoes = document.querySelectorAll(".btn-indicador");
 
-// Adiciona um evento de clique em cada botão
 botoes.forEach(botao => {
   botao.addEventListener("click", () => {
     botao.classList.toggle("ativo");
+  });
+});
+
+document.querySelectorAll('.btn-indicador').forEach(botao => {
+  botao.addEventListener('click', function () {
+    // Remove o foco do botão após o clique
+    this.blur();
   });
 });
 
