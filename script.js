@@ -71,3 +71,7 @@ botaoEnrico.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   obterEstadoLed(); // Verifica o estado do LED ao carregar a página
 });
+
+setInterval(() => {
+  obterEstadoLed();
+}, 1); // 500ms
