@@ -23,10 +23,8 @@ function atualizarBotao(estado) {
     estadoAtual = estado;
     if (estado === 'ON') {
         btEnrico.classList.add('ativo');
-        indicador.style.backgroundColor = '#00ff00';
     } else {
         btEnrico.classList.remove('ativo');
-        indicador.style.backgroundColor = '#ff0000';
     }
 }
 
