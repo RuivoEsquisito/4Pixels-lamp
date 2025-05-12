@@ -1,5 +1,5 @@
 // Configuração do MQTT
-const mqttUrl = '5a0bc93b43b447a9a9708d19abfce039.s1.eu.hivemq.cloud:8884/mqtt';  // URL do seu broker MQTT
+const mqttUrl = 'wss://5a0bc93b43b447a9a9708d19abfce039.s1.eu.hivemq.cloud:8884/mqtt'; // Porta WebSocket segura
 const mqttUsername = 'Enrico';  // Nome de usuário para autenticação no HiveMQ
 const mqttPassword = 'Lari2209-';  // Senha para autenticação no HiveMQ
 const topic = 'esp32/led';  // Tópico em que o ESP32 envia o status do LED
