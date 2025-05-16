@@ -9,30 +9,10 @@ const client = mqtt.connect(mqttUrl, {
     username: mqttUsername,
     password: mqttPassword,
     clientId: 'web-client-' + Math.random().toString(16).substr(2, 8),
-    clean: true,
     reconnectPeriod: 1000,
     rejectUnauthorized: false,
 });
 
-client.on('connect', () => {
-  console.log('Conectado ao MQTT!');
-  client.subscribe('#', (err) => {
-    if (err) {
-      console.error('Erro ao assinar tópico:', err);
-    } else {
-      console.log('Assinatura realizada com sucesso no tópico #');
-      client.publish('teste/hello', 'Olá MQTT!');
-    }
-  });
-});
-
-client.on('message', (topic, message) => {
-  console.log(`Mensagem recebida no tópico ${topic}: ${message.toString()}`);
-});
-
-client.on('error', (err) => {
-  console.error('Erro MQTT:', err);
-});
 
 // Elementos
 const btEnrico = document.getElementById('btEnrico');
