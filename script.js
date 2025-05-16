@@ -1,5 +1,5 @@
 // Configuração do MQTT
-const mqttUrl = 'wss://150.230.76.107:8084';
+const mqttUrl = 'wss://150.230.76.107:8084/mqtt';
 const mqttUsername = 'enrico';
 const mqttPassword = 'Lari2209-';
 const topic = 'esp32/led';
