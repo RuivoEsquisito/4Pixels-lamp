@@ -1,6 +1,6 @@
 // Configuração do MQTT
-const mqttUrl = 'wss://5a0bc93b43b447a9a9708d19abfce039.s1.eu.hivemq.cloud:8884/mqtt';
-const mqttUsername = 'Enrico';
+const mqttUrl = 'wss://5a0bc93b43b447a9a9708d19abfce039.s1.eu.hivemq.cloud:8084';
+const mqttUsername = 'enrico';
 const mqttPassword = 'Lari2209-';
 const topic = 'esp32/led';
 
@@ -10,6 +10,27 @@ const client = mqtt.connect(mqttUrl, {
     password: mqttPassword,
     clientId: 'web-client-' + Math.random().toString(16).substr(2, 8),
     clean: true,
+    reconnectPeriod: 1000,
+});
+
+client.on('connect', () => {
+  console.log('Conectado ao MQTT!');
+  client.subscribe('#', (err) => {
+    if (err) {
+      console.error('Erro ao assinar tópico:', err);
+    } else {
+      console.log('Assinatura realizada com sucesso no tópico #');
+      client.publish('teste/hello', 'Olá MQTT!');
+    }
+  });
+});
+
+client.on('message', (topic, message) => {
+  console.log(`Mensagem recebida no tópico ${topic}: ${message.toString()}`);
+});
+
+client.on('error', (err) => {
+  console.error('Erro MQTT:', err);
 });
 
 // Elementos
