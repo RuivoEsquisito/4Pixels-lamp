@@ -11,6 +11,7 @@ const client = mqtt.connect(mqttUrl, {
     clientId: 'web-client-' + Math.random().toString(16).substr(2, 8),
     clean: true,
     reconnectPeriod: 1000,
+    rejectUnauthorized: false,
 });
 
 client.on('connect', () => {
