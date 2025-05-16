@@ -1,6 +1,6 @@
 // Configuração do MQTT
-const mqttUrl = 'wss://5a0bc93b43b447a9a9708d19abfce039.s1.eu.hivemq.cloud:8884/mqtt';
-const mqttUsername = 'Enrico';
+const mqttUrl = 'wss://150.230.76.107:8084';
+const mqttUsername = 'enrico';
 const mqttPassword = 'Lari2209-';
 const topic = 'esp32/led';
 
