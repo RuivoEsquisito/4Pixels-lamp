@@ -68,10 +68,10 @@ body {
   }
 
   .indicador-fixo {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
   }
   
   .btn-indicador .indicador {
