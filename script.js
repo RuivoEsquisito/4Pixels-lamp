@@ -1,48 +1,123 @@
-const mqttUrl = 'wss://4pixels.duckdns.org:9001';
-const mqttUsername = 'enrico';
-const mqttPassword = 'Nxzero12-';
-const topic = 'esp32/led';
+const brokerUrl = 'wss://4pixels.duckdns.org:9001';
+  const options = {
+    username: 'enrico',
+    password: 'Nxzero123',
+    // Reconectar automaticamente em caso de queda da conexão
+    reconnectPeriod: 5000,       // Tenta reconectar a cada 5 segundos
+    connectTimeout: 30 * 1000    // Tempo limite de conexão (30 segundos)
+  };
+  // Conecta ao broker MQTT usando o protocolo WSS (WebSockets seguro)
+  const client = mqtt.connect(brokerUrl, options);
 
-const client = mqtt.connect(mqttUrl, {
-  username: mqttUsername,
-  password: mqttPassword,
-  clientId: 'web-client-' + Math.random().toString(16).substr(2, 8),
-  clean: true,
-  reconnectPeriod: 1000,
-  rejectUnauthorized: false, // só use false se o certificado for autoassinado, se for LetsEncrypt pode remover
-});
-
-client.on('connect', () => {
-  console.log('Conectado ao broker MQTT!');
-  client.subscribe(topic, { qos: 1 }, (err) => {
-    if (err) console.error('Erro ao assinar tópico:', err);
-    else console.log('Assinatura realizada no tópico:', topic);
-
-    // Envia uma mensagem de teste
-    client.publish('teste/hello', 'Olá MQTT!', { qos: 1, retain: false });
+  // Evento disparado quando a conexão ao broker é estabelecida
+  client.on('connect', function () {
+    console.log('Conectado ao broker MQTT');
+    // Inscreve-se nos tópicos correspondentes aos botões
+    client.subscribe('esp32/led/enrico');
+    client.subscribe('esp32/led/daniel');
+    client.subscribe('esp32/led/henrique');
+    client.subscribe('esp32/led/jose');
+    client.subscribe('esp32/led/matheus');
+    client.subscribe('esp32/led/trovao');
   });
-});
 
-client.on('message', (topic, message) => {
-  console.log(`Mensagem recebida em ${topic}: ${message.toString()}`);
-});
+  // Evento disparado quando o cliente MQTT tenta reconectar
+  client.on('reconnect', function () {
+    console.log('Tentando reconectar ao broker MQTT...');
+  });
 
-client.on('error', (err) => {
-  console.error('Erro MQTT:', err);
-});
+  // Evento disparado em caso de erro na conexão
+  client.on('error', function (err) {
+    console.error('Erro na conexão MQTT:', err.message);
+    // Não é necessário chamar client.end() para reconexão automática
+  });
 
-// Exemplo de botão para publicar ON/OFF
-const btEnrico = document.getElementById('btEnrico');
-let estadoAtual = null;
+  // Evento disparado quando a conexão é fechada (client.disconnect() ou erro fatal)
+  client.on('close', function () {
+    console.log('Conexão MQTT fechada');
+  });
 
-function atualizarBotao(estado) {
-  estadoAtual = estado;
-  if (estado === 'ON') btEnrico.classList.add('ativo');
-  else btEnrico.classList.remove('ativo');
-}
+  // Evento disparado quando o cliente fica offline
+  client.on('offline', function () {
+    console.log('Cliente MQTT está offline');
+  });
 
-btEnrico.addEventListener('click', () => {
-  const novoEstado = estadoAtual === 'ON' ? 'OFF' : 'ON';
-  client.publish(topic, novoEstado, { qos: 1, retain: true });
-  atualizarBotao(novoEstado);
-});
+  // Referência aos botões no HTML (IDs devem existir na página)
+  const btnEnrico    = document.getElementById('btEnrico');
+  const btnDaniel    = document.getElementById('btDaniel');
+  const btnHenrique  = document.getElementById('btHenrique');
+  const btnJose      = document.getElementById('btJose');
+  const btnMatheus   = document.getElementById('btMatheus');
+  const btnTrovao    = document.getElementById('btTrovao');
+
+  // Função genérica para alternar o estado do botão (ON/OFF)
+  function publicarToggle(botao, topico) {
+    // Define o novo estado baseando-se na classe 'ativo'
+    const novoEstado = botao.classList.contains('ativo') ? 'OFF' : 'ON';
+    client.publish(topico, novoEstado);
+  }
+
+  // Adiciona event listeners nos botões para publicar mensagens MQTT ao serem clicados
+  btnEnrico.addEventListener('click', function () {
+    publicarToggle(btnEnrico, 'esp32/led/enrico');
+  });
+  btnDaniel.addEventListener('click', function () {
+    publicarToggle(btnDaniel, 'esp32/led/daniel');
+  });
+  btnHenrique.addEventListener('click', function () {
+    publicarToggle(btnHenrique, 'esp32/led/henrique');
+  });
+   btnJose.addEventListener('click', function () {
+    publicarToggle(btnJose, 'esp32/led/jose');
+  });
+   btnMatheus.addEventListener('click', function () {
+    publicarToggle(btnMatheus, 'esp32/led/matheus');
+  });
+  btnTrovao.addEventListener('click', function () {
+    publicarToggle(btnTrovao, 'esp32/led/trovao');
+  });
+
+  // Manipula mensagens recebidas nos tópicos assinados
+  client.on('message', function (topic, message) {
+    const payload = message.toString(); // Converte o Buffer para string
+    console.log('Mensagem recebida', topic, payload);
+
+    // Atualiza a aparência do botão correspondente de acordo com a mensagem
+    if (topic === 'esp32/led/enrico') {
+      if (payload === 'ON') {
+        btnEnrico.classList.add('ativo');
+      } else if (payload === 'OFF') {
+        btnEnrico.classList.remove('ativo');
+      }
+    } else if (topic === 'esp32/led/daniel') {
+      if (payload === 'ON') {
+        btnDaniel.classList.add('ativo');
+      } else if (payload === 'OFF') {
+        btnDaniel.classList.remove('ativo');
+      }
+    } else if (topic === 'esp32/led/henrique') {
+      if (payload === 'ON') {
+        btnHenrique.classList.add('ativo');
+      } else if (payload === 'OFF') {
+        btnHenrique.classList.remove('ativo');
+      }
+    } else if (topic === 'esp32/led/jose') {
+      if (payload === 'ON') {
+        btnJose.classList.add('ativo');
+      } else if (payload === 'OFF') {
+        btnJose.classList.remove('ativo');
+      }
+    } else if (topic === 'esp32/led/matheus') {
+      if (payload === 'ON') {
+        btnMatheus.classList.add('ativo');
+      } else if (payload === 'OFF') {
+        btnMatheus.classList.remove('ativo');
+      }
+    } else if (topic === 'esp32/led/trovao') {
+      if (payload === 'ON') {
+        btnTrovao.classList.add('ativo');
+      } else if (payload === 'OFF') {
+        btnTrovao.classList.remove('ativo');
+      }
+    }
+  });
