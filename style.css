@@ -83,6 +83,9 @@ body {
   border-radius: 50%;
   background-color: red;
   z-index: 1;
+  border-color: #000000;
+  border-width: 2px;
+  border-style: solid;
 }
 
 /* Indicador animado inferior */
