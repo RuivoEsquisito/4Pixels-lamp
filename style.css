@@ -67,6 +67,19 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
 
+  .btn-indicador {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    text-align: left;
+  }
+
   .indicador-fixo {
     width: 16px;
     height: 16px;
