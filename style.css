@@ -53,10 +53,8 @@ body {
   
 .btn-indicador {
   position: relative;
-  display: flex;
-  align-items: center;              /* Alinha verticalmente */
-  justify-content: center;          /* Centraliza horizontalmente */
-  gap: 12px;
+  display: grid;
+  place-items: center;              /* Centraliza tudo por padrão */
   padding: 10px 20px 30px 20px;
   width: 200px;
   height: 50px;
@@ -68,19 +66,23 @@ body {
   border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  transition: background 0.3s;
+  overflow: hidden;
+}
+
+.btn-indicador .texto-botao {
+  z-index: 1;
 }
 
 .indicador-fixo {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.texto-botao {
-  flex-grow: 1;
-  text-align: center;
+  background-color: red;
+  z-index: 1;
 }
 
 /* Indicador animado inferior */
