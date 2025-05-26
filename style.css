@@ -85,6 +85,8 @@ body {
     height: 16px;
     border-radius: 50%;
     flex-shrink: 0;
+    border-color: #000000;
+    border-width: 3px;
   }
   
   .btn-indicador .indicador {
