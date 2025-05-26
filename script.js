@@ -1,7 +1,7 @@
 // Configuração do MQTT
-const mqttUrl = 'wss://159.112.186.226:8084';
-const mqttUsername = 'Enrico';
-const mqttPassword = 'nxzero123';
+const mqttUrl = 'wss://137.131.249.127:9001';
+const mqttUsername = 'enrico';
+const mqttPassword = 'Nxzero123';
 const topic = 'esp32/led';
 
 // Conectar ao broker MQTT
