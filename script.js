@@ -1,7 +1,7 @@
 const brokerUrl = 'wss://4pixels.duckdns.org:9001';
   const options = {
     username: 'enrico',
-    password: 'Nxzero123',
+    password: 'Nxzero12-',
     // Reconectar automaticamente em caso de queda da conexão
     reconnectPeriod: 5000,       // Tenta reconectar a cada 5 segundos
     connectTimeout: 30 * 1000    // Tempo limite de conexão (30 segundos)
