@@ -1,6 +1,6 @@
 const mqttUrl = 'wss://4pixels.duckdns.org:9001';
 const mqttUsername = 'enrico';
-const mqttPassword = 'Nxzero123';
+const mqttPassword = 'Nxzero12-';
 const topic = 'esp32/led';
 
 const client = mqtt.connect(mqttUrl, {
