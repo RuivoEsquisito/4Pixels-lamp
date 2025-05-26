@@ -2,9 +2,9 @@ const brokerUrl = 'wss://4pixels.duckdns.org:9001';
   const options = {
     username: 'enrico',
     password: 'Nxzero12-',
+    clientId: 'web-client-' + Math.random().toString(16).substr(2, 8), // Gera um ID de cliente único
     // Reconectar automaticamente em caso de queda da conexão
     reconnectPeriod: 5000,       // Tenta reconectar a cada 5 segundos
-    connectTimeout: 30 * 1000    // Tempo limite de conexão (30 segundos)
   };
   // Conecta ao broker MQTT usando o protocolo WSS (WebSockets seguro)
   const client = mqtt.connect(brokerUrl, options);
