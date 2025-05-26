@@ -71,7 +71,6 @@ body {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: #00ff00; /* Cor padrão (pode ser sobrescrita inline) */
   flex-shrink: 0;
   }
   
