@@ -66,6 +66,14 @@ body {
 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
+
+  .indicador-fixo {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #00ff00; /* Cor padrão (pode ser sobrescrita inline) */
+  flex-shrink: 0;
+}
   
   .btn-indicador .indicador {
     position: absolute;
