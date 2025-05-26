@@ -1,5 +1,5 @@
 // Configuração do MQTT
-const mqttUrl = 'ws://137.131.249.127:9001';
+const mqttUrl = 'wss://4pixels.duckdns.org:9001';
 const mqttUsername = 'enrico';
 const mqttPassword = 'Nxzero123';
 const topic = 'esp32/led';
