@@ -53,20 +53,10 @@
     <button onclick="enviarFeedback()">Enviar</button>
   </div>
 
-  <script>
-    function enviarFeedback() {
-      const mensagem = document.getElementById('mensagem').value;
+  <button id="btnAvaliar" class="btn-indicador" style="width: 150px; margin-top: 20px;">
+    Deixar Avaliação
+  </button>
 
-      fetch('/feedback', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mensagem })
-      })
-      .then(res => res.text())
-      .then(alert)
-      .catch(err => alert('Erro ao enviar feedback'));
-    }
-  </script>
 
 </body>
 </html>
