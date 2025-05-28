@@ -38,24 +38,46 @@ Object.entries(botoes).forEach(([topico, botao]) => {
   botao.addEventListener('click', () => publicarToggle(botao, topico));
 });
 
-// Atualiza visual conforme mensagens recebidas
-client.on('message', function (topic, message) {
-  const payload = message.toString();
-  console.log('Mensagem recebida', topic, payload);
+// Abrir e fechar o formulário
+document.addEventListener("DOMContentLoaded", function () {
+  const abrirBtn = document.getElementById("abrirAvaliacao");
+  const fecharBtn = document.getElementById("fecharAvaliacao");
+  const formAvaliacao = document.getElementById("formAvaliacao");
+  const fundoModal = document.getElementById("fundoModal");
 
-  const botao = botoes[topic];
-  if (botao) {
-    const ligado = payload === 'ON';
-    botao.classList.toggle('ativo', ligado);
-    botao.setAttribute('aria-pressed', ligado);
-  }
-});
+  abrirBtn.addEventListener("click", () => {
+    formAvaliacao.style.display = "block";
+    fundoModal.style.display = "block";
+  });
 
-const btnAbrir = document.getElementById('btnAbrirAvaliacao');
-const formContainer = document.getElementById('formAvaliacao');
+  fecharBtn.addEventListener("click", () => {
+    formAvaliacao.style.display = "none";
+    fundoModal.style.display = "none";
+  });
 
-btnAbrir.addEventListener('click', () => {
-  const isVisible = formContainer.style.display === 'block';
-  formContainer.style.display = isVisible ? 'none' : 'block';
-  btnAbrir.textContent = isVisible ? 'Deixar Avaliação' : 'Fechar Avaliação';
+  // Fechar clicando no fundo
+  fundoModal.addEventListener("click", () => {
+    formAvaliacao.style.display = "none";
+    fundoModal.style.display = "none";
+  });
+
+  // Envio do formulário
+  const form = document.querySelector("#formAvaliacao form");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nome = document.getElementById("nome").value;
+    const comentario = document.getElementById("comentario").value;
+    const nota = document.querySelector('input[name="nota"]:checked')?.value;
+
+    console.log("Nome:", nome);
+    console.log("Comentário:", comentario);
+    console.log("Nota:", nota);
+
+    // Aqui você pode adicionar o envio para backend ou API
+
+    // Resetar e fechar
+    form.reset();
+    formAvaliacao.style.display = "none";
+    fundoModal.style.display = "none";
+  });
 });
