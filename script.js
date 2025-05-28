@@ -51,18 +51,22 @@ client.on('message', function (topic, message) {
   }
 });
 
-const btn = document.getElementById('btnAvaliar');
-const modal = document.getElementById('modalAvaliar');
-const closeX = modal.querySelector('.close');
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById('btnAvaliar');
+  const modal = document.getElementById('modalAvaliar');
+  const closeX = modal.querySelector('.close');
 
-btn.addEventListener('click', () => {
-  modal.style.display = 'block';
-});
-closeX.addEventListener('click', () => {
-  modal.style.display = 'none';
-});
-window.addEventListener('click', e => {
-  if (e.target === modal) modal.style.display = 'none';
-});
+  btn.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
 
+  closeX.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
 
+  window.addEventListener('click', e => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
