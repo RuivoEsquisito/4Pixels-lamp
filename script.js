@@ -8,6 +8,16 @@ const options = {
 
 const client = mqtt.connect(brokerUrl, options);
 
+// Referência aos botões MQTT
+const botoes = {
+  'esp32/led/daniel': document.getElementById('btDaniel'),
+  'esp32/led/enrico': document.getElementById('btEnrico'),
+  'esp32/led/henrique': document.getElementById('btHenrique'),
+  'esp32/led/jose': document.getElementById('btJose'),
+  'esp32/led/matheus': document.getElementById('btMatheus'),
+  'esp32/led/trovao': document.getElementById('btTrovao'),
+};
+
 client.on('connect', function () {
   console.log('Conectado ao broker MQTT');
   Object.keys(botoes).forEach(topic => client.subscribe(topic));
@@ -18,27 +28,17 @@ client.on('error', err => console.error('Erro MQTT:', err.message));
 client.on('close', () => console.log('Conexão MQTT fechada'));
 client.on('offline', () => console.log('Cliente está offline'));
 
-// Referência aos botões
-const botoes = {
-  'esp32/led/daniel': document.getElementById('btDaniel'),
-  'esp32/led/enrico': document.getElementById('btEnrico'),
-  'esp32/led/henrique': document.getElementById('btHenrique'),
-  'esp32/led/jose': document.getElementById('btJose'),
-  'esp32/led/matheus': document.getElementById('btMatheus'),
-  'esp32/led/trovao': document.getElementById('btTrovao'),
-};
-
 function publicarToggle(botao, topico) {
   const novoEstado = botao.classList.contains('ativo') ? 'OFF' : 'ON';
   client.publish(topico, novoEstado);
 }
 
-// Associa eventos aos botões dinamicamente
+// Eventos para os botões MQTT
 Object.entries(botoes).forEach(([topico, botao]) => {
   botao.addEventListener('click', () => publicarToggle(botao, topico));
 });
 
-// Atualiza visual conforme mensagens recebidas
+// Atualiza o estado visual dos botões conforme mensagens MQTT
 client.on('message', function (topic, message) {
   const payload = message.toString();
   console.log('Mensagem recebida', topic, payload);
@@ -51,37 +51,18 @@ client.on('message', function (topic, message) {
   }
 });
 
+// Controle do formulário de avaliação
 document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById('btnAvaliar');
-  const modal = document.getElementById('modalAvaliar');
-  const closeX = modal.querySelector('.close');
+  const btnAbrir = document.getElementById('btnAbrirAvaliacao');
+  const formContainer = document.getElementById('formAvaliacao');
 
-  btn.addEventListener('click', () => {
-    modal.style.display = 'block';
-  });
-
-  closeX.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-
-  window.addEventListener('click', e => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
+  btnAbrir.addEventListener('click', () => {
+    if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+      formContainer.style.display = 'block';
+      btnAbrir.textContent = 'Fechar Avaliação';
+    } else {
+      formContainer.style.display = 'none';
+      btnAbrir.textContent = 'Deixar Avaliação';
     }
   });
 });
-
-    const btnAbrir = document.getElementById('btnAbrirAvaliacao');
-    const formContainer = document.getElementById('formAvaliacao');
-
-    btnAbrir.addEventListener('click', () => {
-      if (formContainer.style.display === 'none' || formContainer.style.display === '') {
-        formContainer.style.display = 'block';
-        btnAbrir.textContent = 'Fechar Avaliação';
-      } else {
-        formContainer.style.display = 'none';
-        btnAbrir.textContent = 'Deixar Avaliação';
-      }
-    });
-
-

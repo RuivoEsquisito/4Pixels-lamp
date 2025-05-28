@@ -159,6 +159,9 @@ button:active {
   padding: 8px 10px;
   margin-top: 6px;
   border-radius: 6px;
+  border: none;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #formAvaliacao textarea {
@@ -173,10 +176,52 @@ button:active {
   border-radius: 8px;
   margin-top: 12px;
   width: 100%;
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s ease;
 }
 
+#formAvaliacao button[type="submit"]:hover {
+  background-color: #399aea;
+}
+
+/* Estrelas do sistema de avaliação */
+
 .rating {
-  font-size: 1.5rem;
-  gap: 4px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
   margin-top: 6px;
+  user-select: none;
+}
+
+.rating input[type="radio"] {
+  display: none; /* Esconde os radios */
+}
+
+.rating label {
+  font-size: 28px;
+  color: #777;
+  cursor: pointer;
+  transition: color 0.3s;
+  user-select: none;
+}
+
+.rating label::before {
+  content: "★";
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #02a5dc;
+}
+
+.rating input[type="radio"]:checked ~ label {
+  color: #02a5dc;
+}
+
+.rating input[type="radio"]:checked + label,
+.rating input[type="radio"]:checked + label ~ label {
+  color: #02a5dc;
 }

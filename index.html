@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projeto Lâmpada</title>
-  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="favicon.png" type="image/png" />
   <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>Projeto Lâmpada</h1>
@@ -45,39 +45,45 @@
     </button>
   </div>
 
-  <div class="avaliacao-btn-container">
-  <button id="btnAbrirAvaliacao">Deixar Avaliação</button>
+  <div class="avaliacao-btn-container" style="margin-top: 40px;">
+    <button id="btnAbrirAvaliacao">Deixar Avaliação</button>
   </div>
 
+  <!-- Modal do formulário -->
   <div id="formAvaliacao" style="display:none;">
-    <form name="feedback" method="POST" data-netlify="true">
+    <form name="feedback" method="POST" data-netlify="true" class="modal-content" novalidate>
       <input type="hidden" name="form-name" value="feedback" />
-    
-      <label for="nome">Nome</label><br>
-      <input type="text" id="nome" name="nome" required><br><br>
-    
-      <label for="mensagem">Mensagem</label><br>
-      <textarea id="mensagem" name="mensagem" rows="3" required></textarea><br><br>
-    
+
+      <h2>Avalie nosso projeto</h2>
+
+      <label for="nome">Nome</label><br />
+      <input type="text" id="nome" name="nome" required /><br /><br />
+
+      <label for="mensagem">Mensagem</label><br />
+      <textarea id="mensagem" name="mensagem" rows="3" required></textarea><br /><br />
+
       <label>Avaliação</label>
       <div class="rating">
         <input type="radio" name="nota" id="star5" value="5" />
         <label for="star5" title="Excelente"></label>
+
         <input type="radio" name="nota" id="star4" value="4" />
         <label for="star4" title="Muito bom"></label>
+
         <input type="radio" name="nota" id="star3" value="3" />
         <label for="star3" title="Regular"></label>
+
         <input type="radio" name="nota" id="star2" value="2" />
         <label for="star2" title="Ruim"></label>
+
         <input type="radio" name="nota" id="star1" value="1" required />
         <label for="star1" title="Péssimo"></label>
       </div>
-    
-      <button type="submit">Enviar Avaliação</button>
+
+      <button type="submit" style="margin-top: 20px;">Enviar Avaliação</button>
     </form>
   </div>
 
   <script src="script.js"></script>
-
 </body>
 </html>
