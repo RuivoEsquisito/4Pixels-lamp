@@ -50,3 +50,40 @@ client.on('message', function (topic, message) {
     botao.setAttribute('aria-pressed', ligado);
   }
 });
+
+// controle da modal
+const btn = document.getElementById('btnAvaliar');
+const modal = document.getElementById('modalAvaliar');
+const closeX = modal.querySelector('.close');
+const msg = document.getElementById('msgRetorno');
+
+btn.addEventListener('click', () => {
+  modal.style.display = 'block';
+});
+closeX.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+window.addEventListener('click', e => {
+  if (e.target === modal) modal.style.display = 'none';
+});
+
+// feedback enviado pelo Netlify já redireciona para uma "thank you page" ou recarrega.
+// Se quiser interceptar via AJAX, pode usar fetch:
+const form = document.forms['feedback'];
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = new FormData(form);
+  try {
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString()
+    });
+    msg.textContent = 'Obrigado pelo seu feedback!';
+    form.reset();
+    setTimeout(()=> modal.style.display = 'none', 1500);
+  } catch {
+    msg.textContent = 'Erro ao enviar. Tente novamente.';
+  }
+});
+
