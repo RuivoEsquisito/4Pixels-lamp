@@ -1,50 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Lâmpada</title>
-    <link rel="icon" href="favicon.png" type="image/png">
-    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto Lâmpada</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Projeto Lâmpada</h1>
-    
-    <div class="botoes">
-        <h2>Controle das Lâmpadas</h2>
-        <button class="btn-indicador" id="btDaniel">
-          <span class="indicador-fixo" style="background-color: #000000;"></span>
-          <span class="indicador"></span>
-          <span class="texto-botao">DANIEL</span>
-        </button>
-        <button class="btn-indicador" id="btEnrico">
-          <span class="indicador-fixo" style="background-color: #ff6200;"></span>
-          <span class="indicador"></span>
-          <span class="texto-botao">ENRICO</span>
-        </button>
-        <button class="btn-indicador" id="btHenrique">
-          <span class="indicador-fixo" style="background-color: #ddff00;"></span>
-          <span class="indicador"></span>
-          <span class="texto-botao">HENRIQUE</span>
-        </button>
-        <button class="btn-indicador" id="btJose">
-          <span class="indicador-fixo" style="background-color: #ff00d4;"></span>
-          <span class="indicador"></span>
-          <span class="texto-botao">JOSÉ</span>
-        </button>
-        <button class="btn-indicador" id="btMatheus">
-          <span class="indicador-fixo" style="background-color: #26ff00;"></span>
-          <span class="indicador"></span>
-          <span class="texto-botao">MATHEUS</span>
-        </button>
-        <button class="btn-indicador" id="btTrovao">
-          <span class="indicador-fixo" style="background-color: #1100ff;"></span>
-          <span class="indicador"></span>
-          <span class="texto-botao">TROVÃO</span>
-        </button>
-      </div>
-    
-      <script src="script.js"></script>
+  <h1>Projeto Lâmpada</h1>
+
+  <div class="botoes">
+    <h2>Controle das Lâmpadas</h2>
+    <button class="btn-indicador" id="btDaniel" title="Liga/Desliga lâmpada de Daniel" aria-pressed="false">
+      <span class="indicador-fixo" style="background-color: #000000;"></span>
+      <span class="indicador"></span>
+      <span class="texto-botao">DANIEL</span>
+    </button>
+    <button class="btn-indicador" id="btEnrico" title="Liga/Desliga lâmpada de Enrico" aria-pressed="false">
+      <span class="indicador-fixo" style="background-color: #ff6200;"></span>
+      <span class="indicador"></span>
+      <span class="texto-botao">ENRICO</span>
+    </button>
+    <button class="btn-indicador" id="btHenrique" title="Liga/Desliga lâmpada de Henrique" aria-pressed="false">
+      <span class="indicador-fixo" style="background-color: #ddff00;"></span>
+      <span class="indicador"></span>
+      <span class="texto-botao">HENRIQUE</span>
+    </button>
+    <button class="btn-indicador" id="btJose" title="Liga/Desliga lâmpada de José" aria-pressed="false">
+      <span class="indicador-fixo" style="background-color: #ff00d4;"></span>
+      <span class="indicador"></span>
+      <span class="texto-botao">JOSÉ</span>
+    </button>
+    <button class="btn-indicador" id="btMatheus" title="Liga/Desliga lâmpada de Matheus" aria-pressed="false">
+      <span class="indicador-fixo" style="background-color: #26ff00;"></span>
+      <span class="indicador"></span>
+      <span class="texto-botao">MATHEUS</span>
+    </button>
+    <button class="btn-indicador" id="btTrovao" title="Liga/Desliga lâmpada de Trovão" aria-pressed="false">
+      <span class="indicador-fixo" style="background-color: #1100ff;"></span>
+      <span class="indicador"></span>
+      <span class="texto-botao">TROVÃO</span>
+    </button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

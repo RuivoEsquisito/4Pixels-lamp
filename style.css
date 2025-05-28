@@ -1,60 +1,60 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #575757;
-    color: #333;
-    text-align: center;
-    padding: 50px;
-  }
-  
-  h1 {
-    color: #02a5dc;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #575757;
+  color: #333;
+  text-align: center;
+  padding: 50px;
+}
 
-  h2 {
-    color: #399aea;
-    font-size: 18px;
-    padding: 0px;
-  }
+h1 {
+  color: #02a5dc;
+}
 
-  button {
-    background-color: #0066cc;
-    color: white;
-    border: none;
-    width: 200px;
-    height: 50px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-  }
+h2 {
+  color: #399aea;
+  font-size: 18px;
+  padding: 0px;
+}
 
-  button:hover {
-    background-color: #85fbff;
-  }
+button {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  width: 200px;
+  height: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
 
-  button:active {
-    background-color: #979797   ;
-    transform: scale(0.97); /* Efeito de apertar o botão */
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); /* Profundidade ao clicar */
-  }
+button:hover {
+  background-color: #85fbff;
+}
 
-  .botoes {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    background-color: rgb(63, 63, 63);     /* fundo branco */
-    padding: 15px 30px 15px 30px;
-    border-radius: 12px;         /* cantos arredondados */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* sombra leve */
-    width: fit-content;
-    margin: 0 auto;   
-  }
-  
+button:active {
+  background-color: #979797;
+  transform: scale(0.97);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.botoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  background-color: rgb(63, 63, 63);
+  padding: 15px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin: 0 auto;
+}
+
 .btn-indicador {
   position: relative;
   display: grid;
-  place-items: center;              /* Centraliza tudo por padrão */
+  place-items: center;
   padding: 10px 20px 30px 20px;
   width: 200px;
   height: 50px;
@@ -81,14 +81,10 @@ body {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background-color: red;
   z-index: 1;
-  border-color: #000000;
-  border-width: 2px;
-  border-style: solid;
+  border: 2px solid #000;
 }
 
-/* Indicador animado inferior */
 .btn-indicador .indicador {
   position: absolute;
   bottom: 7px;
@@ -106,11 +102,18 @@ body {
   animation: mover-cor 7s linear infinite;
 }
 
-  @keyframes mover-cor {
-    0% {
-      background-position: 0% 0%;
-    }
-    100% {
-      background-position: 300% 0%; /* volta à cor original */
-    }
+@keyframes mover-cor {
+  0% {
+    background-position: 0% 0%;
   }
+  100% {
+    background-position: 300% 0%;
+  }
+}
+
+@media (max-width: 600px) {
+  .btn-indicador {
+    width: 90%;
+    font-size: 14px;
+  }
+}
