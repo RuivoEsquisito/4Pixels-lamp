@@ -46,5 +46,27 @@
   </div>
 
   <script src="script.js"></script>
+
+  <div class="feedback-form">
+  <h2>Deixe seu feedback</h2>
+  <textarea id="mensagem" placeholder="O que achou do projeto?"></textarea><br>
+  <button onclick="enviarFeedback()">Enviar</button>
+</div>
+
+<script>
+  function enviarFeedback() {
+    const mensagem = document.getElementById('mensagem').value;
+
+    fetch('/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mensagem })
+    })
+    .then(res => res.text())
+    .then(alert)
+    .catch(err => alert('Erro ao enviar feedback'));
+  }
+</script>
+
 </body>
 </html>
