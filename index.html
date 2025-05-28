@@ -1,81 +1,72 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projeto Lâmpada</title>
   <link rel="icon" href="favicon.png" type="image/png" />
-  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 </head>
+
 <body>
   <h1>Projeto Lâmpada</h1>
 
-  <div class="botoes">
-    <h2>Controle das Lâmpadas</h2>
-    <button class="btn-indicador" id="btDaniel" title="Liga/Desliga lâmpada de Daniel" aria-pressed="false">
+  <div class="botoes" role="group" aria-label="Controle das lâmpadas">
+    <button class="btn-indicador" id="btDaniel" title="Liga/Desliga lâmpada de Daniel" aria-pressed="false" type="button">
       <span class="indicador-fixo" style="background-color: #000000;"></span>
       <span class="indicador"></span>
       <span class="texto-botao">DANIEL</span>
     </button>
-    <button class="btn-indicador" id="btEnrico" title="Liga/Desliga lâmpada de Enrico" aria-pressed="false">
+    <button class="btn-indicador" id="btEnrico" title="Liga/Desliga lâmpada de Enrico" aria-pressed="false" type="button">
       <span class="indicador-fixo" style="background-color: #ff6200;"></span>
       <span class="indicador"></span>
       <span class="texto-botao">ENRICO</span>
     </button>
-    <button class="btn-indicador" id="btHenrique" title="Liga/Desliga lâmpada de Henrique" aria-pressed="false">
+    <button class="btn-indicador" id="btHenrique" title="Liga/Desliga lâmpada de Henrique" aria-pressed="false" type="button">
       <span class="indicador-fixo" style="background-color: #ddff00;"></span>
       <span class="indicador"></span>
       <span class="texto-botao">HENRIQUE</span>
     </button>
-    <button class="btn-indicador" id="btJose" title="Liga/Desliga lâmpada de José" aria-pressed="false">
-      <span class="indicador-fixo" style="background-color: #ff00d4;"></span>
+    <button class="btn-indicador" id="btJose" title="Liga/Desliga lâmpada de José" aria-pressed="false" type="button">
+      <span class="indicador-fixo" style="background-color: #0095ff;"></span>
       <span class="indicador"></span>
       <span class="texto-botao">JOSÉ</span>
     </button>
-    <button class="btn-indicador" id="btMatheus" title="Liga/Desliga lâmpada de Matheus" aria-pressed="false">
-      <span class="indicador-fixo" style="background-color: #26ff00;"></span>
-      <span class="indicador"></span>
-      <span class="texto-botao">MATHEUS</span>
-    </button>
-    <button class="btn-indicador" id="btTrovao" title="Liga/Desliga lâmpada de Trovão" aria-pressed="false">
-      <span class="indicador-fixo" style="background-color: #1100ff;"></span>
-      <span class="indicador"></span>
-      <span class="texto-botao">TROVÃO</span>
-    </button>
   </div>
 
-  <div class="avaliacao-btn-container" style="margin-top: 40px;">
-    <button id="btnAbrirAvaliacao">Deixar Avaliação</button>
-  </div>
+  <button id="btnAbrirAvaliacao" aria-haspopup="dialog" aria-controls="modalAvaliacao" aria-expanded="false">
+    Avaliar Site
+  </button>
 
-  <div id="modalAvaliacao" class="modal" style="display:none;">
+  <!-- Modal Avaliação -->
+  <div id="modalAvaliacao" class="modal" role="dialog" aria-modal="true" aria-labelledby="tituloModal" aria-hidden="true">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <form name="feedback" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="feedback" />
-        
-        <label for="nome">Nome</label><br>
-        <input type="text" id="nome" name="nome" required><br><br>
-      
-        <label for="mensagem">Mensagem</label><br>
-        <textarea id="mensagem" name="mensagem" rows="3" required></textarea><br><br>
-      
-        <label>Avaliação</label>
+      <button class="close" aria-label="Fechar Avaliação">&times;</button>
+      <h2 id="tituloModal">Avalie nosso site</h2>
+
+      <form id="formAvaliacao">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required autocomplete="off" />
+
+        <label>Avaliação:</label>
         <div class="rating">
-          <!-- estrelas invertidas -->
-          <input type="radio" name="nota" id="star1" value="1" required />
-          <label for="star1" title="Péssimo"></label>
-          <input type="radio" name="nota" id="star2" value="2" />
-          <label for="star2" title="Ruim"></label>
-          <input type="radio" name="nota" id="star3" value="3" />
-          <label for="star3" title="Regular"></label>
-          <input type="radio" name="nota" id="star4" value="4" />
-          <label for="star4" title="Muito bom"></label>
-          <input type="radio" name="nota" id="star5" value="5" />
+          <input type="radio" id="star5" name="rating" value="5" />
           <label for="star5" title="Excelente"></label>
+          <input type="radio" id="star4" name="rating" value="4" />
+          <label for="star4" title="Muito bom"></label>
+          <input type="radio" id="star3" name="rating" value="3" />
+          <label for="star3" title="Bom"></label>
+          <input type="radio" id="star2" name="rating" value="2" />
+          <label for="star2" title="Ruim"></label>
+          <input type="radio" id="star1" name="rating" value="1" />
+          <label for="star1" title="Péssimo"></label>
         </div>
-    
+
+        <label for="comentarios">Comentários:</label>
+        <textarea id="comentarios" name="comentarios" rows="4" placeholder="Escreva seu comentário aqui..."></textarea>
+
         <button type="submit">Enviar Avaliação</button>
       </form>
     </div>
@@ -83,4 +74,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>

@@ -1,76 +1,144 @@
-const brokerUrl = 'wss://4pixels.duckdns.org:9001';
-const options = {
-  username: 'enrico',
-  password: 'Nxzero12-',
-  clientId: 'web-client-' + Math.random().toString(16).substr(2, 8),
-  reconnectPeriod: 5000,
-};
+// MQTT Setup
+const clientId = "mqttjs_" + Math.random().toString(16).substr(2, 8);
+const host = "wss://test.mosquitto.org:8081"; // servidor MQTT WebSocket
+const topicBase = "luz/";
+const client = mqtt.connect(host, { clientId });
 
-const client = mqtt.connect(brokerUrl, options);
-
-// Referência aos botões MQTT
-const botoes = {
-  'esp32/led/daniel': document.getElementById('btDaniel'),
-  'esp32/led/enrico': document.getElementById('btEnrico'),
-  'esp32/led/henrique': document.getElementById('btHenrique'),
-  'esp32/led/jose': document.getElementById('btJose'),
-  'esp32/led/matheus': document.getElementById('btMatheus'),
-  'esp32/led/trovao': document.getElementById('btTrovao'),
-};
-
-client.on('connect', function () {
-  console.log('Conectado ao broker MQTT');
-  Object.keys(botoes).forEach(topic => client.subscribe(topic));
+client.on("connect", () => {
+  console.log("Conectado ao broker MQTT");
+  client.subscribe(topicBase + "#", (err) => {
+    if (err) console.error("Erro ao assinar tópico:", err);
+  });
 });
 
-client.on('reconnect', () => console.log('Tentando reconectar...'));
-client.on('error', err => console.error('Erro MQTT:', err.message));
-client.on('close', () => console.log('Conexão MQTT fechada'));
-client.on('offline', () => console.log('Cliente está offline'));
-
-function publicarToggle(botao, topico) {
-  const novoEstado = botao.classList.contains('ativo') ? 'OFF' : 'ON';
-  client.publish(topico, novoEstado);
-}
-
-// Eventos para os botões MQTT
-Object.entries(botoes).forEach(([topico, botao]) => {
-  botao.addEventListener('click', () => publicarToggle(botao, topico));
+client.on("error", (error) => {
+  console.error("Erro MQTT:", error);
 });
 
-// Atualiza o estado visual dos botões conforme mensagens MQTT
-client.on('message', function (topic, message) {
+client.on("message", (topic, message) => {
+  // Recebe mensagens para atualizar estado dos botões/indicadores
+  const parte = topic.replace(topicBase, "");
   const payload = message.toString();
-  console.log('Mensagem recebida', topic, payload);
 
-  const botao = botoes[topic];
-  if (botao) {
-    const ligado = payload === 'ON';
-    botao.classList.toggle('ativo', ligado);
-    botao.setAttribute('aria-pressed', ligado);
+  // Atualiza status dos botões conforme mensagem recebida
+  if (["daniel", "enrico", "henrique", "jose"].includes(parte.toLowerCase())) {
+    const btn = document.getElementById("bt" + capitalize(parte));
+    if (!btn) return;
+    if (payload === "1") {
+      ativarBotao(btn, true);
+    } else {
+      ativarBotao(btn, false);
+    }
   }
 });
 
-// Controle do modal de avaliação
-document.addEventListener("DOMContentLoaded", () => {
-  const btnAbrir = document.getElementById('btnAbrirAvaliacao');
-  const modal = document.getElementById('modalAvaliacao');
-  const btnFechar = modal.querySelector('.close');
+// Função auxiliar para deixar primeira letra maiúscula
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
-  // Abre o modal
-  btnAbrir.addEventListener('click', () => {
-    modal.style.display = 'flex';
-  });
+// Controla a ativação visual do botão
+function ativarBotao(botao, ativo) {
+  if (ativo) {
+    botao.classList.add("ativo");
+    botao.setAttribute("aria-pressed", "true");
+    piscarIndicador(botao.querySelector(".indicador"));
+  } else {
+    botao.classList.remove("ativo");
+    botao.setAttribute("aria-pressed", "false");
+    pararPiscar(botao.querySelector(".indicador"));
+  }
+}
 
-  // Fecha ao clicar no "X"
-  btnFechar.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
+// Piscar indicador em verde
+let intervalosPiscar = new Map();
 
-  // Fecha ao clicar fora do conteúdo do modal
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
+function piscarIndicador(el) {
+  if (!el) return;
+  if (intervalosPiscar.has(el)) return; // já piscando
+
+  let ligado = true;
+  el.style.backgroundColor = "#0f0";
+  el.style.boxShadow = "0 0 10px #00ff00";
+
+  const id = setInterval(() => {
+    if (ligado) {
+      el.style.backgroundColor = "#111";
+      el.style.boxShadow = "none";
+      ligado = false;
+    } else {
+      el.style.backgroundColor = "#0f0";
+      el.style.boxShadow = "0 0 10px #00ff00";
+      ligado = true;
     }
+  }, 700);
+
+  intervalosPiscar.set(el, id);
+}
+
+function pararPiscar(el) {
+  if (!el) return;
+  if (intervalosPiscar.has(el)) {
+    clearInterval(intervalosPiscar.get(el));
+    intervalosPiscar.delete(el);
+  }
+  el.style.backgroundColor = "#111";
+  el.style.boxShadow = "none";
+}
+
+// Botões para enviar mensagem MQTT
+document.querySelectorAll(".btn-indicador").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const id = btn.id.slice(2).toLowerCase(); // ex: "btDaniel" -> "daniel"
+    const estadoAtual = btn.classList.contains("ativo");
+    const novoEstado = estadoAtual ? "0" : "1";
+    client.publish(topicBase + id, novoEstado);
+    // O feedback visual será via mensagem MQTT recebida (mesmo sistema)
   });
+});
+
+// Modal Avaliação
+
+function abrirModal() {
+  const modal = document.getElementById("modalAvaliacao");
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden", "false");
+  document.getElementById("btnAbrirAvaliacao").setAttribute("aria-expanded", "true");
+}
+
+function fecharModal() {
+  const modal = document.getElementById("modalAvaliacao");
+  modal.classList.remove("show");
+  modal.setAttribute("aria-hidden", "true");
+  document.getElementById("btnAbrirAvaliacao").setAttribute("aria-expanded", "false");
+}
+
+document.getElementById("btnAbrirAvaliacao").addEventListener("click", abrirModal);
+document.querySelector(".modal .close").addEventListener("click", fecharModal);
+document.getElementById("modalAvaliacao").addEventListener("click", (e) => {
+  if (e.target === e.currentTarget) {
+    fecharModal();
+  }
+});
+
+document.getElementById("formAvaliacao").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const nome = e.target.nome.value.trim();
+  const rating = e.target.rating.value;
+  const comentarios = e.target.comentarios.value.trim();
+
+  if (!nome) {
+    alert("Por favor, preencha seu nome.");
+    return;
+  }
+  if (!rating) {
+    alert("Por favor, selecione uma avaliação.");
+    return;
+  }
+
+  alert(`Obrigado pela avaliação, ${nome}!\nNota: ${rating}\nComentário: ${comentarios}`);
+
+  e.target.reset();
+  fecharModal();
 });
