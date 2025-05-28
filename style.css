@@ -179,3 +179,18 @@ button:active {
 .rating label:hover ~ label {
   color: gold;
 }
+
+@keyframes aparecerModal {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.modal-avaliacao {
+  animation: aparecerModal 0.3s ease-out;
+}
