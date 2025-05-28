@@ -118,7 +118,24 @@ button:active {
   }
 }
 
-/* POSICIONAMENTO NO CENTRO DA TELA */
+.avaliacao-btn-container {
+  margin-top: 60px; /* aumenta o espaçamento */
+  text-align: center;
+}
+
+/* ESCURECER FUNDO QUANDO MODAL ABRIR */
+.modal-avaliacao::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+
+/* GARANTE QUE O MODAL FIQUE ACIMA DO FUNDO ESCURECIDO */
 .modal-avaliacao {
   display: none;
   position: fixed;
