@@ -135,7 +135,18 @@ button:active {
   z-index: -1;
 }
 
-/* GARANTE QUE O MODAL FIQUE ACIMA DO FUNDO ESCURECIDO */
+#fundoModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4); /* Mais leve que o anterior */
+  z-index: 9998;
+  display: none;
+}
+
+/* Modal de Avaliação com animação */
 .modal-avaliacao {
   display: none;
   position: fixed;
@@ -148,6 +159,18 @@ button:active {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   color: #ffffff;
   z-index: 9999;
+  animation: aparecerModal 0.3s ease-out;
+}
+
+@keyframes aparecerModal {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .form-box {
@@ -178,19 +201,4 @@ button:active {
 .rating label:hover,
 .rating label:hover ~ label {
   color: gold;
-}
-
-@keyframes aparecerModal {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -45%) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-.modal-avaliacao {
-  animation: aparecerModal 0.3s ease-out;
 }
