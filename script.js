@@ -71,19 +71,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const btnAbrir = document.getElementById('btnAbrirAvaliacao');
-  const formContainer = document.getElementById('formAvaliacao');
+    const btnAbrir = document.getElementById('btnAbrirAvaliacao');
+    const formContainer = document.getElementById('formAvaliacao');
 
-  btnAbrir.addEventListener('click', () => {
-    if (formContainer.style.display === 'none' || formContainer.style.display === '') {
-      formContainer.style.display = 'block';
-      btnAbrir.textContent = 'Fechar Avaliação';
-    } else {
-      formContainer.style.display = 'none';
-      btnAbrir.textContent = 'Deixar Avaliação';
-    }
-  });
-});
+    btnAbrir.addEventListener('click', () => {
+      if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+        formContainer.style.display = 'block';
+        btnAbrir.textContent = 'Fechar Avaliação';
+      } else {
+        formContainer.style.display = 'none';
+        btnAbrir.textContent = 'Deixar Avaliação';
+      }
+    });
 
 
