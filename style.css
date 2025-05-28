@@ -118,149 +118,65 @@ button:active {
   }
 }
 
-/* Modal Netlify Forms */
-.hidden { display: none; }
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
+.avaliacao-btn-container {
+  margin: 40px 0 60px; /* mais espaço acima e abaixo do botão */
+  text-align: center;
 }
 
-.modal-content {
-  background-color: #1e1e2f;
-  margin: 10% auto;
-  padding: 30px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 450px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  color: white;
-  position: relative;
-}
-
-.modal-content h2 {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  color: #fdfdfd;
-}
-
-.modal-content label {
-  display: block;
-  margin: 10px 0 4px;
-  font-size: 0.95rem;
-}
-
-.modal-content input,
-.modal-content textarea,
-.modal-content select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
+.avaliacao-btn-container button {
+  background-color: #02a5dc;
   border: none;
-  background-color: #2a2a40;
-  color: #fff;
-  font-size: 1rem;
-  margin-bottom: 12px;
-}
-
-.modal-content .btn-primario {
-  width: 100%;
-  background: #4a90e2;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.modal-content .btn-primario:hover {
-  background: #357bd8;
-}
-
-.close {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #fff;
-}
-
-form {
-  background-color: #3f3f3f;
-  padding: 20px;
+  padding: 12px 28px;
+  font-size: 18px;
   border-radius: 10px;
-  width: 100%;
-  max-width: 400px;
-  margin: 20px auto;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+}
+
+.avaliacao-btn-container button:hover {
+  background-color: #399aea;
+}
+
+#formAvaliacao {
+  max-width: 360px;
+  margin: 0 auto 60px;  /* centraliza e dá margem inferior */
+  background-color: #3f3f3f;
+  padding: 15px 20px;
+  border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   color: #ffffff;
 }
 
-form input[type="text"],
-form textarea {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  margin-top: 5px;
+#formAvaliacao form {
+  margin: 0;
+}
+
+#formAvaliacao input[type="text"],
+#formAvaliacao textarea {
   font-size: 14px;
+  padding: 8px 10px;
+  margin-top: 6px;
+  border-radius: 6px;
 }
 
-form textarea {
+#formAvaliacao textarea {
   resize: vertical;
+  min-height: 60px;
 }
 
-form button {
+#formAvaliacao button[type="submit"] {
   background-color: #02a5dc;
-  border: none;
-  padding: 10px 20px;
   font-size: 16px;
+  padding: 8px 20px;
   border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-form button:hover {
-  background-color: #399aea;
+  margin-top: 12px;
+  width: 100%;
 }
 
 .rating {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
-  margin-top: 10px;
-  gap: 6px;
-}
-
-.rating input {
-  display: none;
-}
-
-.rating label {
-  font-size: 2rem;
-  color: #444;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.rating label::before {
-  content: '★';
-}
-
-.rating input:checked ~ label,
-.rating label:hover,
-.rating label:hover ~ label {
-  color: #ffc107;
-}
-
-.rating input:checked ~ label {
-  transform: scale(1.2);
+  font-size: 1.5rem;
+  gap: 4px;
+  margin-top: 6px;
 }
