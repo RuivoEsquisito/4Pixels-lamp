@@ -1,203 +1,54 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #575757;
-  color: #333;
-  text-align: center;
-  padding: 50px;
-}
-
-h1 {
-  color: #02a5dc;
-}
-
-h2 {
-  color: #399aea;
-  font-size: 18px;
-  padding: 0px;
-}
-
-button {
-  background-color: #0066cc;
-  color: white;
-  border: none;
-  width: 200px;
-  height: 50px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #85fbff;
-}
-
-button:active {
-  background-color: #979797;
-  transform: scale(0.97);
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.botoes {
-  display: flex;
-  flex-direction: column;
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
   align-items: center;
-  gap: 15px;
-  background-color: rgb(63, 63, 63);
-  padding: 15px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: fit-content;
-  margin: 0 auto;
+  z-index: 9999;
 }
 
-.btn-indicador {
-  position: relative;
-  display: grid;
-  place-items: center;
-  padding: 10px 20px 30px 20px;
-  width: 200px;
-  height: 50px;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  background-color: #d1d1d1;
-  color: rgb(16, 0, 73);
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-}
-
-.btn-indicador .texto-botao {
-  z-index: 1;
-}
-
-.indicador-fixo {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  z-index: 1;
-  border: 2px solid #000;
-}
-
-.btn-indicador .indicador {
-  position: absolute;
-  bottom: 7px;
-  left: 37.5px;
-  width: 125px;
-  height: 8px;
-  border-radius: 4px;
-  background-color: #878787;
-  transition: background-color 0.3s;
-}
-
-.btn-indicador.ativo .indicador {
-  background: linear-gradient(90deg, #00f7ff, #00d1d8, #00f7ff);
-  background-size: 300% 100%;
-  animation: mover-cor 7s linear infinite;
-}
-
-@keyframes mover-cor {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 300% 0%;
-  }
-}
-
-@media (max-width: 600px) {
-  .btn-indicador {
-    width: 90%;
-    font-size: 14px;
-  }
-}
-
-.avaliacao-btn-container {
-  margin: 40px 0 60px; /* mais espaço acima e abaixo do botão */
-  text-align: center;
-}
-
-.avaliacao-btn-container button {
-  background-color: #02a5dc;
-  border: none;
-  padding: 12px 28px;
-  font-size: 18px;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: background-color 0.3s ease;
-}
-
-.avaliacao-btn-container button:hover {
-  background-color: #399aea;
-}
-
-#formAvaliacao {
-  max-width: 360px;
-  margin: 0 auto 60px;  /* centraliza e dá margem inferior */
+.modal-content {
   background-color: #3f3f3f;
-  padding: 15px 20px;
+  padding: 20px 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  color: #ffffff;
-}
-
-#formAvaliacao form {
-  margin: 0;
-}
-
-#formAvaliacao input[type="text"],
-#formAvaliacao textarea {
-  font-size: 14px;
-  padding: 8px 10px;
-  margin-top: 6px;
-  border-radius: 6px;
-  border: none;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-#formAvaliacao textarea {
-  resize: vertical;
-  min-height: 60px;
-}
-
-#formAvaliacao button[type="submit"] {
-  background-color: #02a5dc;
-  font-size: 16px;
-  padding: 8px 20px;
-  border-radius: 8px;
-  margin-top: 12px;
-  width: 100%;
-  border: none;
-  cursor: pointer;
+  max-width: 400px;
+  width: 90%;
   color: white;
-  transition: background-color 0.3s ease;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.7);
 }
 
-#formAvaliacao button[type="submit"]:hover {
-  background-color: #399aea;
+.modal-content .close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #ccc;
 }
 
-/* Estrelas do sistema de avaliação */
+.modal-content .close:hover {
+  color: #fff;
+}
+
+/* Estrelas invertidas */
 
 .rating {
   display: flex;
+  flex-direction: row-reverse;
   justify-content: center;
-  gap: 6px;
+  font-size: 1.5rem;
+  gap: 4px;
   margin-top: 6px;
-  user-select: none;
 }
 
 .rating input[type="radio"] {
-  display: none; /* Esconde os radios */
+  display: none;
 }
 
 .rating label {

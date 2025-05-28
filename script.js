@@ -51,18 +51,26 @@ client.on('message', function (topic, message) {
   }
 });
 
-// Controle do formulário de avaliação
+// Controle do modal de avaliação
 document.addEventListener("DOMContentLoaded", () => {
   const btnAbrir = document.getElementById('btnAbrirAvaliacao');
-  const formContainer = document.getElementById('formAvaliacao');
+  const modal = document.getElementById('modalAvaliacao');
+  const btnFechar = modal.querySelector('.close');
 
+  // Abre o modal
   btnAbrir.addEventListener('click', () => {
-    if (formContainer.style.display === 'none' || formContainer.style.display === '') {
-      formContainer.style.display = 'block';
-      btnAbrir.textContent = 'Fechar Avaliação';
-    } else {
-      formContainer.style.display = 'none';
-      btnAbrir.textContent = 'Deixar Avaliação';
+    modal.style.display = 'flex';
+  });
+
+  // Fecha ao clicar no "X"
+  btnFechar.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  // Fecha ao clicar fora do conteúdo do modal
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
     }
   });
 });
