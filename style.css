@@ -201,14 +201,30 @@ button:active {
 }
 
 #formAvaliacao button[type="submit"] {
-  background-color: #02a5dc;
-  font-size: 16px;
-  padding: 8px 20px;
-  border-radius: 8px;
-  margin-top: 12px;
-  width: 100%;
-  color: white;
+  background-color: #d1d1d1;
+  color: rgb(16, 0, 73);
   border: none;
+  width: 200px;
+  height: 50px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s, transform 0.1s;
+  margin: 0 auto; /* centralizar */
+  display: block;
+}
+
+#formAvaliacao button[type="submit"]:hover {
+  background-color: #85fbff;
+}
+
+#formAvaliacao button[type="submit"]:active {
+  background-color: #979797;
+  transform: scale(0.97);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
 
 /* Estrelas de avaliação */
