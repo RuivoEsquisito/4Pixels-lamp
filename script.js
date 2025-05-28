@@ -51,35 +51,11 @@ client.on('message', function (topic, message) {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById('btnAvaliar');
-  const modal = document.getElementById('modalAvaliar');
-  const closeX = modal.querySelector('.close');
+const btnAbrir = document.getElementById('btnAbrirAvaliacao');
+const formContainer = document.getElementById('formAvaliacao');
 
-  btn.addEventListener('click', () => {
-    modal.style.display = 'block';
-  });
-
-  closeX.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-
-  window.addEventListener('click', e => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
+btnAbrir.addEventListener('click', () => {
+  const isVisible = formContainer.style.display === 'block';
+  formContainer.style.display = isVisible ? 'none' : 'block';
+  btnAbrir.textContent = isVisible ? 'Deixar Avaliação' : 'Fechar Avaliação';
 });
-
-    const btnAbrir = document.getElementById('btnAbrirAvaliacao');
-    const formContainer = document.getElementById('formAvaliacao');
-
-    btnAbrir.addEventListener('click', () => {
-      if (formContainer.style.display === 'none' || formContainer.style.display === '') {
-        formContainer.style.display = 'block';
-        btnAbrir.textContent = 'Fechar Avaliação';
-      } else {
-        formContainer.style.display = 'none';
-        btnAbrir.textContent = 'Deixar Avaliação';
-      }
-    });

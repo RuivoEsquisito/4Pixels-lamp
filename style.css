@@ -118,65 +118,47 @@ button:active {
   }
 }
 
-.avaliacao-btn-container {
-  margin: 40px 0 60px; /* mais espaço acima e abaixo do botão */
-  text-align: center;
-}
-
-.avaliacao-btn-container button {
-  background-color: #02a5dc;
-  border: none;
-  padding: 12px 28px;
-  font-size: 18px;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: background-color 0.3s ease;
-}
-
-.avaliacao-btn-container button:hover {
-  background-color: #399aea;
-}
-
-#formAvaliacao {
-  max-width: 360px;
-  margin: 0 auto 60px;  /* centraliza e dá margem inferior */
+/* POSICIONAMENTO NO CENTRO DA TELA */
+.modal-avaliacao {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #3f3f3f;
-  padding: 15px 20px;
+  padding: 20px 24px;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   color: #ffffff;
+  z-index: 9999;
 }
 
-#formAvaliacao form {
-  margin: 0;
-}
-
-#formAvaliacao input[type="text"],
-#formAvaliacao textarea {
-  font-size: 14px;
-  padding: 8px 10px;
-  margin-top: 6px;
-  border-radius: 6px;
-}
-
-#formAvaliacao textarea {
-  resize: vertical;
-  min-height: 60px;
-}
-
-#formAvaliacao button[type="submit"] {
-  background-color: #02a5dc;
-  font-size: 16px;
-  padding: 8px 20px;
-  border-radius: 8px;
-  margin-top: 12px;
-  width: 100%;
+.form-box {
+  max-width: 360px;
+  margin: 0 auto;
 }
 
 .rating {
-  font-size: 1.5rem;
-  gap: 4px;
-  margin-top: 6px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 6px;
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+.rating input[type="radio"] {
+  display: none;
+}
+
+.rating label {
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: gold;
 }
