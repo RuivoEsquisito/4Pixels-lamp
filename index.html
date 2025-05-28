@@ -49,39 +49,32 @@
   <button id="btnAbrirAvaliacao">Deixar Avaliação</button>
   </div>
 
-  <div id="modalAvaliar" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Deixe sua Avaliação</h2>
-
-        <form name="feedback" method="POST" data-netlify="true">
-          <input type="hidden" name="form-name" value="feedback" />
-
-          <label for="nome">Nome</label><br>
-          <input type="text" id="nome" name="nome" required><br><br>
-
-          <label for="mensagem">Mensagem</label><br>
-          <textarea id="mensagem" name="mensagem" rows="4" required></textarea><br><br>
-
-          <label>Avaliação</label>
-          <div class="rating">
-            <input type="radio" name="nota" id="star5" value="5" />
-            <label for="star5" title="Excelente"></label>
-            <input type="radio" name="nota" id="star4" value="4" />
-            <label for="star4" title="Muito bom"></label>
-            <input type="radio" name="nota" id="star3" value="3" />
-            <label for="star3" title="Regular"></label>
-            <input type="radio" name="nota" id="star2" value="2" />
-            <label for="star2" title="Ruim"></label>
-            <input type="radio" name="nota" id="star1" value="1" required />
-            <label for="star1" title="Péssimo"></label>
-          </div>
-
-          <br>
-          <button type="submit">Enviar Avaliação</button>
-        </form>
-
-    </div>
+  <div id="formAvaliacao" style="display:none;">
+    <form name="feedback" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="feedback" />
+    
+      <label for="nome">Nome</label><br>
+      <input type="text" id="nome" name="nome" required><br><br>
+    
+      <label for="mensagem">Mensagem</label><br>
+      <textarea id="mensagem" name="mensagem" rows="3" required></textarea><br><br>
+    
+      <label>Avaliação</label>
+      <div class="rating">
+        <input type="radio" name="nota" id="star5" value="5" />
+        <label for="star5" title="Excelente"></label>
+        <input type="radio" name="nota" id="star4" value="4" />
+        <label for="star4" title="Muito bom"></label>
+        <input type="radio" name="nota" id="star3" value="3" />
+        <label for="star3" title="Regular"></label>
+        <input type="radio" name="nota" id="star2" value="2" />
+        <label for="star2" title="Ruim"></label>
+        <input type="radio" name="nota" id="star1" value="1" required />
+        <label for="star1" title="Péssimo"></label>
+      </div>
+    
+      <button type="submit">Enviar Avaliação</button>
+    </form>
   </div>
 
   <script src="script.js"></script>
