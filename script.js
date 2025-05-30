@@ -33,6 +33,15 @@ function publicarToggle(botao, topico) {
   client.publish(topico, novoEstado);
 }
 
+const botoes2 = document.querySelectorAll('.btn-indicador');
+
+botoes2.forEach(botao => {
+  botao.addEventListener('click', function() {
+    this.classList.toggle('ativo'); // Adiciona ou remove a classe 'ativo' ao clicar
+  });
+});
+
+
 // Associa eventos aos botões dinamicamente
 Object.entries(botoes).forEach(([topico, botao]) => {
   botao.addEventListener('click', () => publicarToggle(botao, topico));
