@@ -33,22 +33,8 @@ function publicarToggle(botao, topico) {
   client.publish(topico, novoEstado);
 }
 
-const botoes2 = document.querySelectorAll('.btn-indicador');
-
-botoes2.forEach(botao => {
-  botao.addEventListener('click', function() {
-    this.classList.toggle('ativo'); // Adiciona ou remove a classe 'ativo' ao clicar
-  });
-});
-
-
-// Associa eventos aos botões dinamicamente
-Object.entries(botoes).forEach(([topico, botao]) => {
-  botao.addEventListener('click', () => publicarToggle(botao, topico));
-});
-
 client.on('message', function (topic, message) {
-  const estado = message.toString().trim().toUpperCase(); // Garante "ON" ou "OFF"
+  const estado = message.toString().trim().toUpperCase();
   const botao = botoes[topic];
 
   if (botao) {
@@ -60,6 +46,10 @@ client.on('message', function (topic, message) {
   }
 });
 
+// Associa eventos aos botões dinamicamente
+Object.entries(botoes).forEach(([topico, botao]) => {
+  botao.addEventListener('click', () => publicarToggle(botao, topico));
+});
 
 // Abrir e fechar o formulário
 document.addEventListener("DOMContentLoaded", function () {
