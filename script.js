@@ -47,6 +47,20 @@ Object.entries(botoes).forEach(([topico, botao]) => {
   botao.addEventListener('click', () => publicarToggle(botao, topico));
 });
 
+client.on('message', function (topic, message) {
+  const estado = message.toString().trim().toUpperCase(); // Garante "ON" ou "OFF"
+  const botao = botoes[topic];
+
+  if (botao) {
+    if (estado === 'ON') {
+      botao.classList.add('ativo');
+    } else if (estado === 'OFF') {
+      botao.classList.remove('ativo');
+    }
+  }
+});
+
+
 // Abrir e fechar o formulário
 document.addEventListener("DOMContentLoaded", function () {
   const abrirBtn = document.getElementById("abrirAvaliacao");
